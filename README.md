@@ -1,11 +1,11 @@
   # FishGame
-  Project FishGame Season 3
+  Project FishGame Season 3  
 
-  AlphaDo 봇과 함께하는 낚시게임!
-  시즌 3 오픈을 준비하고 있습니다.
+  AlphaDo 봇과 함께하는 낚시게임!  
+  시즌 3 오픈을 준비하고 있습니다.  
   다양한 컨텐츠 아이디어를 남겨주세요!
 
-  #
+  # 
 
   #### 개발 현황
   * [X] NoSQL 서버 구축 on Raspberry Pi 4B
@@ -27,8 +27,8 @@
   * [ ] Season 2 연동 코드 프로그래밍
   * [ ] 5차 시연 및 정식 오픈
 
-  #
+  # 
 
   #### Project FishGame
-  이 프로젝트는 오픈소스입니다.
+  이 프로젝트는 오픈소스입니다.  
   다만 KakaoTalk Bot 코드는 오픈하지 않을 것을 사전 고지합니다.
