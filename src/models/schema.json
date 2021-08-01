@@ -1,0 +1,97 @@
+{
+    "fishGame": {
+        "users": [{
+            "_id":"MONGOOSE OBJECT ID",
+            "bucket": {
+                "contents": [],
+                "size": 10,
+                "sortType": "DEFAULT"
+            },
+            "exp": {
+                "current": 0,
+                "max": 100
+            },
+            "fishingRod": {
+                "current": "평범한 낚싯대",
+                "list": [{
+                    "durability": {
+                        "current": 100,
+                        "max": 100
+                    },
+                    "level": 1,
+                    "name":"평범한 낚싯대",
+                    "probability": {
+                        "trash": 50,
+                        "common": 40,
+                        "rare": 10
+                    },
+                    "tier": "일반"
+                }]
+            },
+            "hp": {
+                "current": 1000,
+                "max": 1000
+            },
+            "level": 1,
+            "location": "평화의 숲",
+            "mainId": "MONGOOSE MAIN OBJECT ID",
+            "money": 10000,
+            "name": "USER NAME",
+            "progress": {
+                "current": "DEFAULT",
+                "log": []
+            },
+            "recoveryRoom": {
+                "entry": null,
+                "level": 1
+            },
+            "task": {
+                "fishing": null
+            },
+            "title": {
+                "current": "뉴비",
+                "list": ["뉴비", "Noob"]
+            }
+        }]
+    },
+    "main": {
+        "rooms": [{
+            "_id": "MONGOOSE OBJECT ID",
+            "group": true,
+            "managers": ["USER ID"],
+            "name": "ROOM NAME",
+            "prefix": {
+                "default": "",
+                "fishGame": "/"
+            },
+            "separator": {
+                "default": " ",
+                "fishGame": " "
+            },
+            "start": 0,
+            "type": "KakaoTalk"
+        }],
+        "users": [{
+            "_id": "MONGOOSE OBJECT ID",
+            "account": {
+                "current": null,
+                "list": [{
+                    "id": "MONGOOSE OBJECT ID",
+                    "name": "USER NAME",
+                    "type": "fishGame"
+                }]
+            },
+            "authority": "USER | SUB MANAGER | MANAGER",
+            "birth": "",
+            "email": "example123@example.com",
+            "join": 0,
+            "mileage": 0,
+            "name": "USER NAME",
+            "profile": {
+                "discord": "DISCORD PROFILE ID",
+                "kakaotalk": "KAKAOTALK PROFILE ID"
+            },
+            "sponsorship": 0
+        }]
+    }
+}

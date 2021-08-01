@@ -1,18 +1,19 @@
-import * as express from 'express';
+import { Router, Request, Response } from 'express';
 import * as mongoose from 'mongoose';
-import User from '../models/users';
+
+import User from '../../models/main/User';
 import { client } from '../../server';
 
-const router = express.Router();
+const router = Router();
 
-router.get('/', (_req: any, res: any) => {
+router.get('/', (_req: Request, res: Response) => {
     User.find()
         .exec()
-        .then(docs => {
+        .then((docs: any) => {
             console.log(docs);
             res.status(200).json(docs);
         })
-        .catch(err => {
+        .catch((err: any) => {
             console.log(err);
             res.status(500).json({
                 error: err
@@ -20,15 +21,20 @@ router.get('/', (_req: any, res: any) => {
         });
 });
 
-router.post('/', (req: any, res: any) => {
+router.post('/', async (req: Request, res: Response) => {
     const user = new User({
         _id: new mongoose.Types.ObjectId(),
+        account: req.body.account,
+        authority: req.body.authority,
+        birth: req.body.birth,
+        email: req.body.email,
+        join: req.body.join,
         name: req.body.name,
-        money: req.body.money
+        sponsorship: req.body.sponsorship
     });
 
-    user.save()
-        .then(result => {
+    await user.save()
+        .then((result: any) => {
             console.log(result);
             client.user.setActivity(`새로운 유저, ${req.body.name} 님이 가입했어요!`, { type: 'LISTENING' });
             res.status(201).json({
@@ -36,7 +42,7 @@ router.post('/', (req: any, res: any) => {
                 createdUser: result
             });
         })
-        .catch(err => {
+        .catch((err: any) => {
             console.log(err);
             res.status(500).json({
                 error: err
@@ -44,12 +50,12 @@ router.post('/', (req: any, res: any) => {
         });
 });
 
-router.get('/:userId', (req: any, res: any) => {
+router.get('/:userId', (req: Request, res: Response) => {
     const id = req.params.userId;
 
     User.findById(id)
         .exec()
-        .then(doc => {
+        .then((doc: any) => {
             console.log('From database', doc);
 
             if (doc) {
@@ -60,7 +66,7 @@ router.get('/:userId', (req: any, res: any) => {
                 });
             }
         })
-        .catch(err => {
+        .catch((err: any) => {
             console.log(err);
             res.status(500).json({
                 error: err
@@ -68,7 +74,7 @@ router.get('/:userId', (req: any, res: any) => {
         });
 });
 
-router.patch('/:userId', (req: any, res: any) => {
+router.patch('/:userId', (req: Request, res: Response) => {
     const id = req.params.userId;
     const update = {};
 
@@ -78,11 +84,11 @@ router.patch('/:userId', (req: any, res: any) => {
 
     User.updateOne({ _id: id }, { $set: update })
         .exec()
-        .then(result => {
+        .then((result: any) => {
             console.log(result);
             res.status(200).json(result);
         })
-        .catch(err => {
+        .catch((err: any) => {
             console.log(err);
             res.status(500).json({
                 error: err
@@ -90,15 +96,15 @@ router.patch('/:userId', (req: any, res: any) => {
         });
 });
 
-router.delete('/:userId', (req: any, res: any) => {
+router.delete('/:userId', (req: Request, res: Response) => {
     const id = req.params.userId;
 
     User.deleteOne({ _id: id })
         .exec()
-        .then(result => {
+        .then((result: any) => {
             res.status(200).json(result);
         })
-        .catch(err => {
+        .catch((err: any) => {
             console.log(err);
             res.status(500).json({
                 error: err
