@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import * as mongoose from 'mongoose';
 
-import User from '../../models/main/User';
+import User from '../../models/Main/User';
 import { client } from '../../server';
 
 const router = Router();

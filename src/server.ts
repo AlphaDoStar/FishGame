@@ -4,12 +4,12 @@ import * as express from 'express';
 import { utc } from 'moment';
 import { connect } from 'mongoose';
 
-import userRoutes from './routes/main/users';
+import userRoutes from './routes/Main/users';
 
 config();
 
 const BOT_TOKEN: string = process.env.BOT_TOKEN || '';
-const MONGO_URL: string = process.env.MONGO_URL || '';
+const MONGO_URI: string = process.env.MONGO_URI || '';//
 const SERVER_PORT: number = 5000;
 const STATUS_TERM: number = 10000;
 
@@ -75,7 +75,7 @@ client.on('message', (msg: Message) => {
     await client.login(BOT_TOKEN);
 
     // Connect to MongoDB
-    await connect(MONGO_URL, {
+    await connect(`${MONGO_URI}fishGame`, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false,

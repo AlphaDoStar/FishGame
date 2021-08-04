@@ -1,4 +1,5 @@
-import { Document, Model, model, Schema, Types } from 'mongoose';
+import { createConnection, Document, Model, model, Schema, Types } from 'mongoose';
+import { model as m } from '../../config/model';
 
 /**
  * Interface to model the Main User Schema for TypeScript.
@@ -20,7 +21,7 @@ export interface IMainUser extends Document {
     sponsorship: number;
 }
 
-const accountSchema = new Schema({
+const accountSchema = new Schema({ //수정해야 합니다 ~
     id: {
         type: String,
         required: true
@@ -81,5 +82,11 @@ const userSchema = new Schema({
 });
 
 const User: Model<IMainUser> = model('User', userSchema);
+
+const User2: Model<any> = createConnection('').model('User', userSchema);
+
+const User3: Model<any> = m('User', {
+    schema: userSchema
+});
 
 export default User;

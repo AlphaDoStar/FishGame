@@ -1,7 +1,7 @@
 import { Document, Model, model, Schema, Types } from 'mongoose';
 
-import FishingRod from './FishingRod';
-import Fish from './Fish';
+import FishingRod from './fishingRod';
+import Fish from './fish';
 
 /**
  * Interface to model the FishGame User Schema for TypeScript.
