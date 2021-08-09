@@ -1,19 +1,22 @@
 import { Router, Request, Response } from 'express';
 import * as mongoose from 'mongoose';
 
-import User from '../../models/Main/User';
 import { client } from '../../server';
+import { getModel } from '../../models/model';
+import { IMainUser } from '../../models/Main/User';
 
 const router = Router();
 
-router.get('/', (_req: Request, res: Response) => {
+router.get('/', async (_req: Request, res: Response) => {
+    const User: mongoose.Model<IMainUser> = (await getModel())?.Main.User;
+
     User.find()
         .exec()
-        .then((docs: any) => {
+        .then((docs: object) => {
             console.log(docs);
             res.status(200).json(docs);
         })
-        .catch((err: any) => {
+        .catch((err: Error) => {
             console.log(err);
             res.status(500).json({
                 error: err
@@ -22,6 +25,7 @@ router.get('/', (_req: Request, res: Response) => {
 });
 
 router.post('/', async (req: Request, res: Response) => {
+    const User: mongoose.Model<IMainUser> = (await getModel())?.Main.User;
     const user = new User({
         _id: new mongoose.Types.ObjectId(),
         account: req.body.account,
@@ -29,20 +33,21 @@ router.post('/', async (req: Request, res: Response) => {
         birth: req.body.birth,
         email: req.body.email,
         join: req.body.join,
+        mileage: req.body.mileage,
         name: req.body.name,
+        profile: req.body.profile,
         sponsorship: req.body.sponsorship
     });
 
     await user.save()
-        .then((result: any) => {
+        .then((result: object) => {
             console.log(result);
-            client.user.setActivity(`새로운 유저, ${req.body.name} 님이 가입했어요!`, { type: 'LISTENING' });
             res.status(201).json({
                 message: 'Handling POST requests to /users',
                 createdUser: result
             });
         })
-        .catch((err: any) => {
+        .catch((err: Error) => {
             console.log(err);
             res.status(500).json({
                 error: err
@@ -50,12 +55,13 @@ router.post('/', async (req: Request, res: Response) => {
         });
 });
 
-router.get('/:userId', (req: Request, res: Response) => {
+router.get('/:userId', async (req: Request, res: Response) => {
+    const User: mongoose.Model<IMainUser> = (await getModel())?.Main.User;
     const id = req.params.userId;
 
     User.findById(id)
         .exec()
-        .then((doc: any) => {
+        .then((doc: object) => {
             console.log('From database', doc);
 
             if (doc) {
@@ -66,7 +72,7 @@ router.get('/:userId', (req: Request, res: Response) => {
                 });
             }
         })
-        .catch((err: any) => {
+        .catch((err: Error) => {
             console.log(err);
             res.status(500).json({
                 error: err
@@ -74,21 +80,17 @@ router.get('/:userId', (req: Request, res: Response) => {
         });
 });
 
-router.patch('/:userId', (req: Request, res: Response) => {
+router.patch('/:userId', async (req: Request, res: Response) => {
+    const User: mongoose.Model<IMainUser> = (await getModel())?.Main.User;
     const id = req.params.userId;
-    const update = {};
-
-    for (const ops of req.body) {
-        update[ops.propName] = ops.value;
-    }
+    const update = req.body;
 
     User.updateOne({ _id: id }, { $set: update })
         .exec()
-        .then((result: any) => {
-            console.log(result);
+        .then((result: object) => {
             res.status(200).json(result);
         })
-        .catch((err: any) => {
+        .catch((err: Error) => {
             console.log(err);
             res.status(500).json({
                 error: err
@@ -96,15 +98,16 @@ router.patch('/:userId', (req: Request, res: Response) => {
         });
 });
 
-router.delete('/:userId', (req: Request, res: Response) => {
+router.delete('/:userId', async (req: Request, res: Response) => {
+    const User: mongoose.Model<IMainUser> = (await getModel())?.Main.User;
     const id = req.params.userId;
 
     User.deleteOne({ _id: id })
         .exec()
-        .then((result: any) => {
+        .then((result: object) => {
             res.status(200).json(result);
         })
-        .catch((err: any) => {
+        .catch((err: Error) => {
             console.log(err);
             res.status(500).json({
                 error: err

@@ -1,24 +1,25 @@
 import { Client, Message, MessageEmbed } from 'discord.js';
-import { config } from 'dotenv'
+import { config } from 'dotenv';
 import * as express from 'express';
 import { utc } from 'moment';
-import { connect } from 'mongoose';
 
+import { createModels } from './models/model';
 import userRoutes from './routes/Main/users';
 
 config();
 
 const BOT_TOKEN: string = process.env.BOT_TOKEN || '';
-const MONGO_URI: string = process.env.MONGO_URI || '';//
+const MONGO_URI: string = process.env.MONGO_URI || '';
 const SERVER_PORT: number = 5000;
 const STATUS_TERM: number = 10000;
 
 const app = express();
-export const client: Client = new Client();
 const status: string[] = [
     'AlphaDo Bot FishGame',
     `Listening on port ${SERVER_PORT}...`,
 ];
+
+export const client: Client = new Client();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -75,17 +76,12 @@ client.on('message', (msg: Message) => {
     await client.login(BOT_TOKEN);
 
     // Connect to MongoDB
-    await connect(`${MONGO_URI}fishGame`, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useFindAndModify: false,
-            useCreateIndex: true
-        })
+    await createModels(MONGO_URI)
         .then(() => {
             console.log('MongoDB connected...');
         })
         .catch((err: any) => {
-            console.error(`Connection error : ${err.message}`);
+            console.log(err.message);
             process.exit(1);
-        });
+        })
 })();

@@ -1,4 +1,4 @@
-import { Document, Model, model, Schema, Types } from 'mongoose';
+import { Document, Schema, Types } from 'mongoose';
 
 /**
  * Interface to model the Main Room Schema for TypeScript.
@@ -20,7 +20,7 @@ export interface IMainRoom extends Document {
     type: string;
 }
 
-const roomSchema = new Schema({
+export default new Schema({
     _id: {
         type: Schema.Types.ObjectId,
         default: new Types.ObjectId()
@@ -68,7 +68,3 @@ const roomSchema = new Schema({
 }, {
     versionKey: false
 });
-
-const Room: Model<IMainRoom> = model('Room', roomSchema);
-
-export default Room;

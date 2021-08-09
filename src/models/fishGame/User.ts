@@ -1,4 +1,4 @@
-import { Document, Model, model, Schema, Types } from 'mongoose';
+import { Document, Schema, Types } from 'mongoose';
 
 import FishingRod from './fishingRod';
 import Fish from './fish';
@@ -35,16 +35,16 @@ export interface IFishGameUser extends Document {
     title: object;
 }
 
-const userSchema = new Schema({
+export default new Schema({
     _id: {
         type: Schema.Types.ObjectId,
         default: new Types.ObjectId()
     },
-    bucket: {
+    bucket: {/*
         contents: {
             type: [Fish],
             default: []
-        },
+        },*/
         size: {
             type: Number,
             default: 10
@@ -69,7 +69,7 @@ const userSchema = new Schema({
             type: String,
             default: '평범한 낚싯대'
         },
-        list: {
+        /*list: {
             type: [FishingRod],
             default: [
                 new FishingRod({
@@ -82,7 +82,7 @@ const userSchema = new Schema({
                     tier: 'common'
                 })
             ]
-        }
+        }*/
     },
     hp: {
         current: {
@@ -137,7 +137,7 @@ const userSchema = new Schema({
     },
     task: {
         fishing: {
-            type: null,
+            type: Object,
             default: null
         }
     },
@@ -154,7 +154,3 @@ const userSchema = new Schema({
 }, {
     versionKey: false
 });
-
-const User: Model<IFishGameUser> = model('User', userSchema);
-
-export default User;

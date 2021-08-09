@@ -88,8 +88,14 @@
             "mileage": 0,
             "name": "USER NAME",
             "profile": {
-                "discord": "DISCORD PROFILE ID",
-                "kakaotalk": "KAKAOTALK PROFILE ID"
+                "discord": {
+                    "id": "DISCORD PROFILE ID",
+                    "login": false
+                },
+                "kakaotalk": {
+                    "id": "KAKAOTALK PROFILE ID",
+                    "login": true
+                }
             },
             "sponsorship": 0
         }]
