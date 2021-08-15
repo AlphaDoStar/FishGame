@@ -5,7 +5,7 @@ import { client } from '../../server';
 import { getModel } from '../../models/model';
 import { IMainUser } from '../../models/Main/User';
 
-const router = Router();
+const router: Router = Router();
 
 router.get('/', async (_req: Request, res: Response) => {
     const User: mongoose.Model<IMainUser> = (await getModel())?.Main.User;
@@ -34,7 +34,6 @@ router.post('/', async (req: Request, res: Response) => {
         email: req.body.email,
         join: req.body.join,
         mileage: req.body.mileage,
-        name: req.body.name,
         profile: req.body.profile,
         sponsorship: req.body.sponsorship
     });

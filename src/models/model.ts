@@ -7,8 +7,9 @@ import FishGameUserSchema from './FishGame/User';
 const options: ConnectOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true
+    useFindAndModify: true,
+    useCreateIndex: true,
+    autoIndex: false
 };
 
 let model: object = null;

@@ -86,15 +86,16 @@
             "email": "example123@example.com",
             "join": 0,
             "mileage": 0,
-            "name": "USER NAME",
             "profile": {
                 "discord": {
                     "id": "DISCORD PROFILE ID",
-                    "login": false
+                    "login": false,
+                    "name": "USER NAME"
                 },
                 "kakaotalk": {
                     "id": "KAKAOTALK PROFILE ID",
-                    "login": true
+                    "login": true,
+                    "name": "USER NAME"
                 }
             },
             "sponsorship": 0

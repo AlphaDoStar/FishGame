@@ -2,15 +2,15 @@ import { Document, Schema, Types } from 'mongoose';
 
 /**
  * Interface to model the Main User Schema for TypeScript.
- * @param account:object accountStatus
- * @param authority:string authority
- * @param birth:Date birthday
- * @param email:string emailAddress
- * @param join:Date subscriptionDate
- * @param mileage:number mileage
- * @param name:string name
- * @param profile:object profileStatus
- * @param sponsorship:number sponsoredAmount
+ * @param { Object } account
+ * @param { String } authority
+ * @param { Date } birth
+ * @param { String } email
+ * @param { Date } join
+ * @param { Number } mileage
+ * @param { String } name
+ * @param { Object } profile
+ * @param { Number } sponsorship
  */
 export interface IMainUser extends Document {
     account: object;
@@ -19,7 +19,6 @@ export interface IMainUser extends Document {
     email: string;
     join: Date;
     mileage: number;
-    name: string;
     profile: object;
     sponsorship: number;
 }
@@ -64,7 +63,6 @@ export default new Schema({
     },
     email: {
         type: String,
-        default: null,
         unique: true
     },
     join: {
@@ -75,32 +73,33 @@ export default new Schema({
         type: Number,
         default: 0
     },
-    name: {
-        type: String,
-        required: true,
-        unique: true
-    },
     profile: {
         discord: {
             id: {
                 type: String,
-                default: null,
                 unique: true
             },
             login: {
                 type: Boolean,
                 default: false
+            },
+            name: {
+                type: String,
+                unique: true
             }
         },
         kakaotalk: {
             id: {
                 type: String,
-                default: null,
                 unique: true
             },
             login: {
                 type: Boolean,
                 default: false
+            },
+            name: {
+                type: String,
+                unique: true
             }
         }
     },
